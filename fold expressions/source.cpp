@@ -28,6 +28,13 @@ auto push_back(CONTAINER & c, VALUES&&... values)
     (c.push_back(std::forward<VALUES>(values)),...);
 }
 
+template <typename FUNCTION, typename... VALUES>
+auto apply_on_each(FUNCTION func, VALUES&&... values)
+{
+    (func(std::forward<VALUES>(values)),...);
+}
+
+
 int main()
 {
     std::cout << sumBinary() << std::endl; 
@@ -38,4 +45,8 @@ int main()
     for (auto val : v)
         std::cout << val << " ";
     std::cout << std::endl;
+    apply_on_each([](int val)
+    {
+        std::cout << val << " ";
+    }, 10, 20, 30, 40, 50);
 }
