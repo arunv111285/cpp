@@ -23,6 +23,8 @@ template <typename CONTAINER, typename... VALUES>
 auto push_back(CONTAINER & c, VALUES&&... values)
 {
     //(c.push_back(values), ...);
+    // This is a right associative fold. So push back expansion will be performed from right most to left most.
+    // But "," operator has higher precedence and thus the actual push back will be in correct order
     (c.push_back(std::forward<VALUES>(values)),...);
 }
 
